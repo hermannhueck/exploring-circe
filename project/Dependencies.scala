@@ -2,13 +2,13 @@ import sbt._
 
 object Dependencies {
 
-  val collectionCompatVersion = "2.1.2"
+  val collectionCompatVersion = "2.1.6"
   val shapelessVersion        = "2.3.3"
   val catsVersion             = "2.0.0"
-  val jawnVersion             = "1.0.0-RC2"
-  val circeVersion            = "0.12.3"
-  val scalaTestVersion        = "3.0.8"
-  val scalaCheckVersion       = "1.14.2"
+  val jawnVersion             = "1.0.0"
+  val circeVersion            = "0.13.0"
+  val scalaTestVersion        = "3.1.2"
+  val scalaCheckVersion       = "1.14.3"
 
   val collectionCompat   = "org.scala-lang.modules" %% "scala-collection-compat" % collectionCompatVersion
   val shapeless          = "com.chuusai"            %% "shapeless"               % shapelessVersion
@@ -19,9 +19,9 @@ object Dependencies {
   val circeCore          = "io.circe"               %% "circe-core"              % circeVersion
   val circeParser        = "io.circe"               %% "circe-parser"            % circeVersion
   val circeGeneric       = "io.circe"               %% "circe-generic"           % circeVersion
-  val circeGenericExtras = "io.circe"               %% "circe-generic-extras"    % "0.12.2"
+  val circeGenericExtras = "io.circe"               %% "circe-generic-extras"    % circeVersion
   val circeShapes        = "io.circe"               %% "circe-shapes"            % circeVersion
-  val circeOptics        = "io.circe"               %% "circe-optics"            % "0.12.0"
+  val circeOptics        = "io.circe"               %% "circe-optics"            % circeVersion
   val scalaTest          = "org.scalatest"          %% "scalatest"               % scalaTestVersion
   val scalaCheck         = "org.scalacheck"         %% "scalacheck"              % scalaCheckVersion
 }

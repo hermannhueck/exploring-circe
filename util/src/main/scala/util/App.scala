@@ -2,10 +2,8 @@ package util
 
 import java.lang.System.{currentTimeMillis => currentTime}
 import scala.collection.mutable.ListBuffer
-// import scala.util.Using
 import util.formatting._
 
-@scala.annotation.nowarn("cat=deprecation&since=2.11.0&msg=trait DelayedInit:ws")
 trait App extends DelayedInit {
 
   final val executionStart: Long = currentTime
