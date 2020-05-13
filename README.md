@@ -1,4 +1,5 @@
-# PROJECT TITLE
+# Exploring Circe for JSON Encoding/Decoding
 
-PROJECT DESCRIPTION
+See also:
+https://circe.github.io/circe/
 
