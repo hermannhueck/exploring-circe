@@ -28,7 +28,7 @@ object ADTsEncodingAndDecoding2 extends util.App {
 
   object ShapesDerivation {
 
-    import io.circe.shapes
+    // import io.circe.shapes
     import shapeless.{Coproduct, Generic}
 
     implicit def encodeAdtNoDiscr[A, Repr <: Coproduct](
