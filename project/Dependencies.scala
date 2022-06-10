@@ -2,13 +2,7 @@ import sbt._
 
 object Dependencies {
 
-  val collectionCompatVersion = "2.1.6"
-  val shapelessVersion        = "2.3.3"
-  val catsVersion             = "2.0.0"
-  val jawnVersion             = "1.0.0"
-  val circeVersion            = "0.13.0"
-  val scalaTestVersion        = "3.1.2"
-  val scalaCheckVersion       = "1.14.3"
+  import Versions._
 
   val collectionCompat   = "org.scala-lang.modules" %% "scala-collection-compat" % collectionCompatVersion
   val shapeless          = "com.chuusai"            %% "shapeless"               % shapelessVersion
@@ -23,5 +17,15 @@ object Dependencies {
   val circeShapes        = "io.circe"               %% "circe-shapes"            % circeVersion
   val circeOptics        = "io.circe"               %% "circe-optics"            % circeVersion
   val scalaTest          = "org.scalatest"          %% "scalatest"               % scalaTestVersion
+  val munit              = "org.scalameta"          %% "munit"                   % munitVersion
   val scalaCheck         = "org.scalacheck"         %% "scalacheck"              % scalaCheckVersion
+
+  // https://github.com/typelevel/kind-projector
+  lazy val kindProjectorPlugin = compilerPlugin(
+    compilerPlugin("org.typelevel" % "kind-projector" % kindProjectorVersion cross CrossVersion.full)
+  )
+  // https://github.com/oleg-py/better-monadic-for
+  lazy val betterMonadicForPlugin = compilerPlugin(
+    compilerPlugin("com.olegpy" %% "better-monadic-for" % betterMonadicForVersion)
+  )
 }

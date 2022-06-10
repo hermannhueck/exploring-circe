@@ -1,2 +1,2 @@
-// https://github.com/sbt/sbt-buildinfo
-addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "latest.release")
+// https://scalacenter.github.io/scalafix/docs/users/installation.html
+addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.10.1")
