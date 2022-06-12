@@ -10,6 +10,7 @@ object Dependencies {
   val circeGenericExtras = "io.circe"       %% "circe-generic-extras" % circeVersion
   val circeShapes        = "io.circe"       %% "circe-shapes"         % circeVersion
   val circeOptics        = "io.circe"       %% "circe-optics"         % circeVersion
+  val circeTesting       = "io.circe"       %% "circe-testing"        % circeVersion
   val scalaTest          = "org.scalatest"  %% "scalatest"            % scalaTestVersion
   val munit              = "org.scalameta"  %% "munit"                % munitVersion
   val scalaCheck         = "org.scalacheck" %% "scalacheck"           % scalaCheckVersion

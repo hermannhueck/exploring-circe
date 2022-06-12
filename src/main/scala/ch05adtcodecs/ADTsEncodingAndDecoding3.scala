@@ -8,18 +8,15 @@ import io.circe.syntax._
 
 object ADTsEncodingAndDecoding3 extends App {
 
-  println()
+  dash80.green.println()
+
   s"$dash10 A more generic solution (with circe-shapes) $dash10".magenta.println()
 
   """|
      |The generic-extras module provides a little more configurability in this respect. We can write the following, for example:
      |""".stripMargin pipe println
 
-  sealed trait Event                         extends Product with Serializable
-  final case class Foo(i: Int)               extends Event
-  final case class Bar(s: String)            extends Event
-  final case class Baz(c: Char)              extends Event
-  final case class Qux(values: List[String]) extends Event
+  import ch05adtcodecs.event._
 
   import io.circe.generic.extras.auto._
   import io.circe.generic.extras.Configuration
@@ -44,4 +41,6 @@ object ADTsEncodingAndDecoding3 extends App {
      |had a member named what_am_i), but in many cases it’s reasonable
      |and it’s been supported in generic-extras since that module was introduced.
      |""".stripMargin pipe println
+
+  dash80.green.println()
 }

@@ -11,7 +11,8 @@ import io.circe.{Decoder, Encoder}
 
 object ADTsEncodingAndDecoding1 extends App {
 
-  println()
+  dash80.green.println()
+
   s"$dash10 ADTs encoding and decoding $dash10".magenta.println()
 
   """|
@@ -19,12 +20,7 @@ object ADTsEncodingAndDecoding1 extends App {
      |but explicitly defined instances for the ADT type.
      |""".stripMargin pipe println
 
-  sealed trait Event                         extends Product with Serializable
-  final case class Foo(i: Int)               extends Event
-  final case class Bar(s: String)            extends Event
-  final case class Baz(c: Char)              extends Event
-  final case class Qux(values: List[String]) extends Event
-
+  import ch05adtcodecs.event._
   object GenericDerivation {
 
     implicit val encodeEvent: Encoder[Event] = Encoder.instance {
@@ -45,12 +41,14 @@ object ADTsEncodingAndDecoding1 extends App {
 
   import GenericDerivation._
 
-  decode[Event]("""{ "i": 1000 }""") pipe println
+  decode[Event]("""{ "i": 1000 }""") tap println
   // res0: Either[io.circe.Error,Event] = Right(Foo(1000))
 
-  parse("""{ "i": 1000 }""").flatMap(_.as[Event]) pipe println
+  parse("""{ "i": 1000 }""").flatMap(_.as[Event]) tap println
   // res1: Either[io.circe.Error,Event] = Right(Foo(1000))
 
-  (Foo(100): Event).asJson.noSpaces pipe println
+  (Foo(100): Event).asJson.noSpaces tap println
   // res2: String = {"i":100}
+
+  dash80.green.println()
 }

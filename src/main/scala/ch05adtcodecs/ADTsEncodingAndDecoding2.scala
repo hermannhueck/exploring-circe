@@ -10,18 +10,15 @@ import io.circe.{Decoder, Encoder}
 
 object ADTsEncodingAndDecoding2 extends App {
 
-  println()
+  dash80.green.println()
+
   s"$dash10 A more generic solution (with circe-shapes) $dash10".magenta.println()
 
   """|
      |As discussed on Gitter, we can avoid the fuss of writing out all the cases by using the circe-shapes module:
      |""".stripMargin pipe println
 
-  sealed trait Event                         extends Product with Serializable
-  final case class Foo(i: Int)               extends Event
-  final case class Bar(s: String)            extends Event
-  final case class Baz(c: Char)              extends Event
-  final case class Qux(values: List[String]) extends Event
+  import ch05adtcodecs.event._
 
   // To suppress previously imported inplicit codecs.
   // import ADTsEncodingAndDecoding1.GenericDerivation.{decodeEvent => _, encodeEvent => _}
@@ -66,4 +63,6 @@ object ADTsEncodingAndDecoding2 extends App {
      |that the constructors will be tried in alphabetical order, which may not be what we want
      |if we have ambiguous case classes (where the member names and types are the same).
      |""".stripMargin pipe println
+
+  dash80.green.println()
 }

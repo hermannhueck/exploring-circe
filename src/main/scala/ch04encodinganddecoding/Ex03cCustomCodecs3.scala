@@ -6,10 +6,12 @@ import hutil.stringformat._
 import io.circe._
 import io.circe.syntax._
 
-object CustomCodecs3 extends App {
+object Ex03cCustomCodecs3 extends App {
 
-  println()
-  s"$dash10 Custom key types $dash10".magenta.println()
+  dash80.green.println()
+
+  s"$dash10 Encoding/Decoding Map[K, V] $dash10".magenta.println()
+  s"$dash10 Custom Key Types $dash10".magenta.println()
 
   """|
      |If you need to encode/decode Map[K, V] where K is not String (or Symbol, Int, Long, etc.),
@@ -29,19 +31,19 @@ object CustomCodecs3 extends App {
   )
   // map: scala.collection.immutable.Map[Foo,Int] = Map(Foo(hello) -> 123, Foo(world) -> 456)
 
+  implicit val fooKeyDecoder: KeyDecoder[Foo] = new KeyDecoder[Foo] {
+    override def apply(key: String): Option[Foo] = Some(Foo(key))
+  }
+  // fooKeyDecoder: io.circe.KeyDecoder[Foo] = $anon$1@22682c48
+
   val json = map.asJson tap println
   // json: io.circe.Json =
   // {
   //   "hello" : 123,
   //   "world" : 456
   // }
-
-  implicit val fooKeyDecoder: KeyDecoder[Foo] = new KeyDecoder[Foo] {
-    override def apply(key: String): Option[Foo] = Some(Foo(key))
-  }
-  // fooKeyDecoder: io.circe.KeyDecoder[Foo] = $anon$1@22682c48
-
-  println()
-  json.as[Map[Foo, Int]] pipe println
+  json.as[Map[Foo, Int]] tap println
   // res0: io.circe.Decoder.Result[Map[Foo,Int]] = Right(Map(Foo(hello) -> 123, Foo(world) -> 456))
+
+  dash80.green.println()
 }

@@ -46,6 +46,7 @@ lazy val root = (project in file("."))
       circeGenericExtras,
       circeShapes,
       circeOptics,
+      circeTesting,
       kindProjectorPlugin,
       betterMonadicForPlugin,
       munit      % Test,
