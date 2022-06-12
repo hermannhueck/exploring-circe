@@ -1,5 +1,7 @@
 package circewebsite.ch01quickstart
 
+import hutil.stringformat._
+
 import scala.util.chaining._
 
 import io.circe.generic.auto._
@@ -7,6 +9,8 @@ import io.circe.parser._
 import io.circe.syntax._
 
 object FooCodec extends App {
+
+  dash80.green.println()
 
   sealed trait Foo
   case class Bar(xs: Vector[String])        extends Foo
@@ -23,4 +27,6 @@ object FooCodec extends App {
 
   val decodedFoo = decode[Foo](jsonString)
   s"foo decoded from Json:\n$decodedFoo" pipe println
+
+  dash80.green.println()
 }
