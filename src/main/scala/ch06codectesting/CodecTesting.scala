@@ -1,4 +1,4 @@
-package ch06codetesting
+package ch06codectesting
 
 import scala.util.chaining._
 
