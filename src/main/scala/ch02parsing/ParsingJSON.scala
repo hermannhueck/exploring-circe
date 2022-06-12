@@ -1,11 +1,15 @@
 package ch02parsing
 
+import hutil.stringformat._
+
 import scala.util.chaining._
 
 import io.circe._
 import io.circe.parser._
 
 object ParsingJSON extends App {
+
+  dash80.green.println()
 
   val rawJson: String =
     """|{
@@ -41,4 +45,6 @@ object ParsingJSON extends App {
   "\n----- Either#fold:" pipe println
   val json2: Json = parse(rawJson).fold(_ => Json.Null, identity)
   json2.noSpaces pipe println
+
+  dash80.green.println()
 }

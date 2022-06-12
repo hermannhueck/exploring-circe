@@ -8,6 +8,8 @@ import io.circe.parser._
 
 object TraversingAndModifyingJSON extends App {
 
+  dash80.green.println()
+
   val rawJson: String =
     """|{
        |  "id": "c730433b-082c-4984-9d66-855c243266f0",
@@ -63,4 +65,6 @@ object TraversingAndModifyingJSON extends App {
      |- HCursor: tracks the history of operations performed. This can be used to provide useful error messages when something goes wrong.
      |- ACursor: also tracks history, but represents the possibility of failure (e.g. calling downField on a field that doesn’t exist)
      |""".stripMargin pipe println
+
+  dash80.green.println()
 }
