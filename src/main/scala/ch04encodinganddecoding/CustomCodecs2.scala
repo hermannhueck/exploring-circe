@@ -1,4 +1,4 @@
-package circewebsite.ch04encodinganddecoding
+package ch04encodinganddecoding
 
 import java.time.Instant
 

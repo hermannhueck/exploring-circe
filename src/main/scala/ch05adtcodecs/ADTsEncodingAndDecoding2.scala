@@ -1,4 +1,4 @@
-package circewebsite.ch05adtcodecs
+package ch05adtcodecs
 
 import scala.util.chaining._
 
@@ -31,14 +31,12 @@ object ADTsEncodingAndDecoding2 extends App {
     // import io.circe.shapes
     import shapeless.{Coproduct, Generic}
 
-    implicit def encodeAdtNoDiscr[A, Repr <: Coproduct](
-        implicit
+    implicit def encodeAdtNoDiscr[A, Repr <: Coproduct](implicit
         gen: Generic.Aux[A, Repr],
         encodeRepr: Encoder[Repr]
     ): Encoder[A] = encodeRepr.contramap(gen.to)
 
-    implicit def decodeAdtNoDiscr[A, Repr <: Coproduct](
-        implicit
+    implicit def decodeAdtNoDiscr[A, Repr <: Coproduct](implicit
         gen: Generic.Aux[A, Repr],
         decodeRepr: Decoder[Repr]
     ): Decoder[A] = decodeRepr.map(gen.from)

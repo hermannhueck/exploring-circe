@@ -1,4 +1,4 @@
-package circewebsite.ch01quickstart
+package ch01quickstart
 
 import hutil.stringformat._
 

@@ -1,4 +1,4 @@
-package circewebsite.ch05adtcodecs
+package ch05adtcodecs
 
 import scala.util.chaining._
 

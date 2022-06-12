@@ -1,4 +1,4 @@
-package circewebsite.ch06circeoptics
+package ch06circeoptics
 
 import scala.util.chaining._
 

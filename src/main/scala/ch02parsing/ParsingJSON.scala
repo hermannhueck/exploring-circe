@@ -1,4 +1,4 @@
-package circewebsite.ch02parsing
+package ch02parsing
 
 import scala.util.chaining._
 

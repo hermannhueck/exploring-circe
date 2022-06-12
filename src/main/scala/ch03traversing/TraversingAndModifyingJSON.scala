@@ -1,4 +1,4 @@
-package circewebsite.ch03traversing
+package ch03traversing
 
 import scala.util.chaining._
 
@@ -22,7 +22,7 @@ object TraversingAndModifyingJSON extends App {
   "----- rawJson =" pipe println
   rawJson pipe println
 
-  val doc: Json = parse(rawJson).getOrElse(Json.Null)
+  val doc: Json       = parse(rawJson).getOrElse(Json.Null)
   "\n----- doc =" pipe println
   doc.noSpaces pipe println
 
