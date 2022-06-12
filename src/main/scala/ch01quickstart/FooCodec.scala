@@ -17,16 +17,19 @@ object FooCodec extends App {
   case class Qux(i: Int, d: Option[Double]) extends Foo
 
   val foo: Foo = Qux(13, Some(14.0))
-  s"foo:\n$foo\n" pipe println
+  s"foo:                              $foo" pipe println
 
   val json = foo.asJson
-  s"foo encoded to Json:\n$json\n" pipe println
+  s"foo encoded to Json:              $json" pipe println
+
+  val foo2 = json.as[Foo]
+  s"foo2 decoded from Json:           $foo2" pipe println
 
   val jsonString = json.noSpaces
-  s"foo encoded to Json (w/o spaces):\n$jsonString\n" pipe println
+  s"foo encoded to Json (w/o spaces): $jsonString" pipe println
 
   val decodedFoo = decode[Foo](jsonString)
-  s"foo decoded from Json:\n$decodedFoo" pipe println
+  s"foo decoded from Json String:     $decodedFoo" pipe println
 
   dash80.green.println()
 }
