@@ -5,24 +5,24 @@ import ScalacOptions._
 val projectName        = "playground-circe"
 val projectDescription = "My Circe Playground"
 
-ThisBuild / fork := true
-ThisBuild / turbo := true                  // default: false
+ThisBuild / fork                   := true
+ThisBuild / turbo                  := true // default: false
 ThisBuild / includePluginResolvers := true // default: false
-Global / onChangedBuildSource := ReloadOnSourceChanges
+Global / onChangedBuildSource      := ReloadOnSourceChanges
 
 inThisBuild(
   Seq(
-    version := projectVersion,
-    scalaVersion := scala2Version,
-    publish / skip := true,
+    version                  := projectVersion,
+    scalaVersion             := scala2Version,
+    publish / skip           := true,
     scalacOptions ++= defaultScalacOptions,
-    semanticdbEnabled := true,
-    semanticdbVersion := scalafixSemanticdb.revision,
+    semanticdbEnabled        := true,
+    semanticdbVersion        := scalafixSemanticdb.revision,
     scalafixDependencies ++= Seq("com.github.liancheng" %% "organize-imports" % scalafixOrganizeImportsVersion),
     Test / parallelExecution := false,
     // run 100 tests for each property // -s = -minSuccessfulTests
     Test / testOptions += Tests.Argument(TestFrameworks.ScalaCheck, "-s", "100"),
-    initialCommands :=
+    initialCommands          :=
       s"""|
           |import scala.util.chaining._
           |import scala.concurrent.duration._
@@ -36,8 +36,8 @@ inThisBuild(
 
 lazy val root = (project in file("."))
   .settings(
-    name := projectName,
-    description := projectDescription,
+    name                              := projectName,
+    description                       := projectDescription,
     Compile / console / scalacOptions := consoleScalacOptions,
     libraryDependencies ++= Seq(
       circeCore,
@@ -46,12 +46,8 @@ lazy val root = (project in file("."))
       circeGenericExtras,
       circeShapes,
       circeOptics,
-      jawnParser,
-      jawnAst,
       kindProjectorPlugin,
       betterMonadicForPlugin,
-      collectionCompat,
-      shapeless,
       munit      % Test,
       scalaTest  % Test,
       scalaCheck % Test
