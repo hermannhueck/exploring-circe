@@ -8,7 +8,8 @@ import io.circe.parser._
 
 object Optics extends App {
 
-  println()
+  dash80.green.println()
+
   s"$dash10 Traversing JSON $dash10".magenta.println()
 
   val jsonDocument = """
@@ -172,4 +173,6 @@ object Optics extends App {
     JsonPath.root.order.itemss.each.quantity.int.modify(_ * 2) // Note the "itemss" typo
 
   val modifiedJsonTypo = doubleQuantitiesTypo(json) tap println
+
+  dash80.green.println()
 }
