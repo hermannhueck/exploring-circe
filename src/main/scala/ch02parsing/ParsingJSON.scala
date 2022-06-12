@@ -1,9 +1,8 @@
 package ch02parsing
 
-import hutil.stringformat._
-
 import scala.util.chaining._
 
+import hutil.stringformat._
 import io.circe._
 import io.circe.parser._
 

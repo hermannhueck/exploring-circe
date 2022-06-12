@@ -1,9 +1,8 @@
 package ch04encodinganddecoding
 
-import hutil.stringformat._
-
 import scala.util.chaining._
 
+import hutil.stringformat._
 import io.circe.syntax._
 
 object Ex00EncodingAndDecoding extends App {

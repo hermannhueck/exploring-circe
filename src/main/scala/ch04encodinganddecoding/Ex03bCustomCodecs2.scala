@@ -1,11 +1,10 @@
 package ch04encodinganddecoding
 
-import hutil.stringformat._
-
 import java.time.Instant
 
 import scala.util.chaining._
 
+import hutil.stringformat._
 import io.circe.parser.decode
 import io.circe.syntax._
 import io.circe.{Decoder, Encoder}

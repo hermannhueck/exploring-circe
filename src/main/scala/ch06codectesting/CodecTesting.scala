@@ -3,7 +3,6 @@ package ch06codectesting
 import scala.util.chaining._
 
 import hutil.stringformat._
-
 import io.circe._
 import io.circe.syntax._
 
