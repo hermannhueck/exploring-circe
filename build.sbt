@@ -48,9 +48,6 @@ lazy val root = (project in file("."))
       circeOptics,
       circeTesting,
       kindProjectorPlugin,
-      betterMonadicForPlugin,
-      munit      % Test,
-      scalaTest  % Test,
-      scalaCheck % Test
+      betterMonadicForPlugin
     )
   )
