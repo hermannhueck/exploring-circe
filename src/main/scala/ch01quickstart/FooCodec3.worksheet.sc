@@ -7,7 +7,9 @@ import io.circe.syntax._
 case class Bar(xs: Vector[String])        extends Foo
 case class Qux(i: Int, d: Option[Double]) extends Foo
 
-object Foo // see https://circe.github.io/circe/codecs/known-issues.html
+object Foo
+// This worksheet does not compile without companion object Foo.
+// see https://circe.github.io/circe/codecs/known-issues.html
 
 val foo: Foo = Qux(13, Some(14.0))
 
