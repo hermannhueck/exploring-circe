@@ -2,8 +2,8 @@ import Versions._
 import Dependencies._
 import ScalacOptions._
 
-val projectName        = "playground-circe"
-val projectDescription = "My Circe Playground"
+val projectName        = "exploring-circe"
+val projectDescription = "Exploring Circe for JSON Processing"
 
 ThisBuild / fork                   := true
 ThisBuild / turbo                  := true // default: false
