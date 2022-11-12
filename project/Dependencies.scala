@@ -9,7 +9,7 @@ object Dependencies {
   val circeGeneric       = "io.circe" %% "circe-generic"        % circeVersion
   val circeGenericExtras = "io.circe" %% "circe-generic-extras" % circeVersion
   val circeShapes        = "io.circe" %% "circe-shapes"         % circeVersion
-  val circeOptics        = "io.circe" %% "circe-optics"         % circeVersion
+  val circeOptics        = "io.circe" %% "circe-optics"         % circeOpticsVersion
   val circeTesting       = "io.circe" %% "circe-testing"        % circeVersion
 
   // https://github.com/typelevel/kind-projector

@@ -4,10 +4,11 @@ object Versions {
   val projectVersion = "0.2.0"
 
   // Scala
-  val scala2Version = "2.13.8"
+  val scala2Version = "2.13.9"
 
   // 3rd party libraries
-  val circeVersion = "0.14.1"
+  val circeVersion       = "0.14.3"
+  val circeOpticsVersion = "0.14.1"
 
   // compiler plugins
   val kindProjectorVersion    = "0.13.2"
