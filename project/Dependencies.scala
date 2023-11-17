@@ -7,7 +7,7 @@ object Dependencies {
   val circeCore          = "io.circe" %% "circe-core"           % circeVersion
   val circeParser        = "io.circe" %% "circe-parser"         % circeVersion
   val circeGeneric       = "io.circe" %% "circe-generic"        % circeVersion
-  val circeGenericExtras = "io.circe" %% "circe-generic-extras" % circeVersion
+  val circeGenericExtras = "io.circe" %% "circe-generic-extras" % circeGenericExtrasVersion
   val circeShapes        = "io.circe" %% "circe-shapes"         % circeVersion
   val circeOptics        = "io.circe" %% "circe-optics"         % circeOpticsVersion
   val circeTesting       = "io.circe" %% "circe-testing"        % circeVersion
