@@ -1,5 +1,3 @@
-import scala.util.chaining._
-
 import io.circe.parser.decode
 import io.circe.syntax._
 import io.circe.{Decoder, Encoder, HCursor, Json}
@@ -31,6 +29,6 @@ implicit val decodeFoo: Decoder[Thing] = new Decoder[Thing] {
 }
 // decodeFoo: io.circe.Decoder[Thing] = $anon$1@74145742
 
-val json = new Thing("foo", 42).asJson tap println
-json.as[Thing] tap println
-decode(json.noSpaces) tap println
+val json = new Thing("foo", 42).asJson
+json.as[Thing]
+decode(json.noSpaces)

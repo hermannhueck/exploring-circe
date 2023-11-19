@@ -1,18 +1,13 @@
-import hutil.stringformat._
-import scala.util.chaining._
-
 import cats.syntax.functor._
 import io.circe.generic.auto._
 import io.circe.parser._
 import io.circe.syntax._
 import io.circe.{Decoder, Encoder}
 
-s"$dash10 ADTs encoding and decoding $dash10".magenta.println()
+// ADTs encoding and decoding
 
-"""|
-   |The most straightforward way to encode / decode ADTs is by using generic derivation for the case classes
-   |but explicitly defined instances for the ADT type.
-   |""".stripMargin pipe println
+// The most straightforward way to encode / decode ADTs is by using generic derivation for the case classes
+// but explicitly defined instances for the ADT type.
 
 import ch05adtcodecs.event._
 
@@ -36,11 +31,8 @@ object GenericDerivation {
 
 import GenericDerivation._
 
-decode[Event]("""{ "i": 1000 }""") pipe println
-// res0: Either[io.circe.Error,Event] = Right(Foo(1000))
+decode[Event]("""{ "i": 1000 }""")
 
-parse("""{ "i": 1000 }""").flatMap(_.as[Event]) pipe println
-// res1: Either[io.circe.Error,Event] = Right(Foo(1000))
+parse("""{ "i": 1000 }""").flatMap(_.as[Event])
 
-(Foo(100): Event).asJson.noSpaces pipe println
-// res2: String = {"i":100}
+(Foo(100): Event).asJson.noSpaces

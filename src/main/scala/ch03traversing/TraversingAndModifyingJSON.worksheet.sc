@@ -15,32 +15,31 @@ val rawJson: String =
      |    "qux": ["a", "b"]
      |  }
      |} """.stripMargin
-"----- rawJson =" pipe println
-rawJson pipe println
 
-val doc: Json       = parse(rawJson).getOrElse(Json.Null)
-"\n----- doc =" pipe println
-doc.noSpaces pipe println
+val doc: Json =
+  parse(rawJson)
+    .getOrElse(Json.Null)
 
-s"$dash10 Extracting data $dash10".magenta.println()
-s"$dash5 Using an HCursor =".println()
 val cursor: HCursor = doc.hcursor
 
 val baz: Decoder.Result[Double] =
-  cursor.downField("values").downField("baz").as[Double]
-// baz: io.circe.Decoder.Result[Double] = Right(100.001)
-baz pipe println
+  cursor
+    .downField("values")
+    .downField("baz")
+    .as[Double]
 
 // You can also use `get[A](key)` as shorthand for `downField(key).as[A]`
 val baz2: Decoder.Result[Double] =
-  cursor.downField("values").get[Double]("baz")
-// baz2: io.circe.Decoder.Result[Double] = Right(100.001)
-baz2 pipe println
+  cursor
+    .downField("values")
+    .get[Double]("baz")
 
 val secondQux: Decoder.Result[String] =
-  cursor.downField("values").downField("qux").downArray.as[String]
-// secondQux: io.circe.Decoder.Result[String] = Right(a)
-secondQux pipe println
+  cursor
+    .downField("values")
+    .downField("qux")
+    .downArray
+    .as[String]
 
 s"$dash10 Transforming data $dash10".magenta.println()
 "----- Using an ACursor =" pipe println

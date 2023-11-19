@@ -1,10 +1,7 @@
-import scala.util.chaining._
-
-import hutil.stringformat._
 import io.circe._
 import io.circe.parser._
 
-s"$dash10 Traversing JSON $dash10".magenta.println()
+// Traversing JSON with Optics
 
 val jsonDocument = """
 {
@@ -30,11 +27,11 @@ val jsonDocument = """
 }
   """
 
-jsonDocument pipe println
+val json =
+  parse(jsonDocument)
+    .getOrElse(Json.Null)
 
-val json = parse(jsonDocument).getOrElse(Json.Null)
-
-"--- retrieving phone number using a cursor:" pipe println
+// retrieving phone number using a cursor:"
 
 val phoneNum: Option[String] =
   json
@@ -44,10 +41,8 @@ val phoneNum: Option[String] =
     .downField("contactDetails")
     .get[String]("phone")
     .toOption
-// phoneNum: Option[String] = Some(0123-456-789)
-phoneNum pipe println
 
-"--- retrieving phone number with optics:" pipe println
+// retrieving phone number with optics:"
 
 import io.circe.optics.JsonPath
 // import io.circe.optics.JsonPath._
@@ -59,9 +54,9 @@ val _phoneNum =
 val phoneNum2: Option[String] = _phoneNum.getOption(json)
 // phoneNum: Option[String] = Some(0123-456-789)
 
-phoneNum2 pipe println
+phoneNum2
 
-"--- retrieving items and quantities using a cursor:" pipe println
+// retrieving items and quantities using a cursor:"
 
 val items: Vector[Json] = json
   .hcursor
@@ -70,25 +65,12 @@ val items: Vector[Json] = json
   .focus
   .flatMap(_.asArray)
   .getOrElse(Vector.empty)
-  .tap(println)
-// items: Vector[io.circe.Json] =
-// Vector({
-//   "id" : 123,
-//   "description" : "banana",
-//   "quantity" : 1
-// }, {
-//   "id" : 456,
-//   "description" : "apple",
-//   "quantity" : 2
-// })
 
 val quantities: Vector[Int] =
   items
     .flatMap(_.hcursor.get[Int]("quantity").toOption)
-    .tap(println)
-// quantities: Vector[Int] = Vector(1, 2)
 
-"\n--- retrieving items and quantities with optics:" pipe println
+"\n--- retrieving items and quantities with optics:"
 
 val items2 =
   JsonPath
@@ -97,7 +79,7 @@ val items2 =
     .items
     .arr
     .getOption(json)
-    .getOrElse(Vector.empty) tap println
+    .getOrElse(Vector.empty)
 
 val quantities2: List[Int] =
   JsonPath
@@ -107,10 +89,9 @@ val quantities2: List[Int] =
     .each
     .quantity
     .int
-    .getAll(json) tap println
-// quantities2: List[Int] = List(1, 2)
+    .getAll(json)
 
-s"$dash10 Modifying JSON $dash10".magenta.println()
+// Modifying JSON
 
 val doubleQuantities: Json => Json =
   JsonPath
@@ -121,12 +102,11 @@ val doubleQuantities: Json => Json =
     .quantity
     .int
     .modify(_ * 2)
-// doubleQuantities: io.circe.Json => io.circe.Json = monocle.PTraversal$$Lambda$9793/0x0000000802610840@6b6cd655
 
 val modifiedJson: Json =
-  doubleQuantities(json) tap println
+  doubleQuantities(json)
 
-s"$dash10 Recursively modifying JSON $dash10".magenta.println()
+// Recursively modifying JSON
 
 import io.circe.optics.JsonOptics._
 import monocle.function.Plated
@@ -136,29 +116,33 @@ Plated.transform[Json] { j =>
     case Some(n) => Json.fromString(n.toString)
     case None    => j
   }
-}(json) pipe println
+}(json)
 
-s"$dash10 Dynamic $dash10".magenta.println()
+// Dynamic
 
-"""|
-   |Some of the code above may look quite magical at first glance.
-   |How are we calling methods like order, items and customer on circe’s JsonPath class?
-   |
-   |The answer is that JsonPath relies on a slightly obscure feature of Scala called Dynamic.
-   |This means you can call methods that don’t actually exist. When you do so,
-   |the selectDynamic method is called, and the name of the method you wanted to call is passed as an argument.
-   |""".stripMargin pipe println
+// Some of the code above may look quite magical at first glance.
+// How are we calling methods like order, items and customer on circe’s JsonPath class?
+//
+// The answer is that JsonPath relies on a slightly obscure feature of Scala called Dynamic.
+// This means you can call methods that don’t actually exist. When you do so,
+// the selectDynamic method is called, and the name of the method you wanted to call is passed as an argument.
 
-s"$dash10 Warning $dash10".magenta.println()
+// Warning
 
-"""|
-   |The use of Dynamic means that your code is not “typo-safe”. For example, if you fat-finger the previous example:
-   |
-   |This code will compile just fine, but not do what you expect.
-   |Because the JSON document doesn’t have an itemss field, the same document will be returned unmodified.
-   |""".stripMargin pipe println
+// The use of Dynamic means that your code is not “typo-safe”. For example, if you fat-finger the previous example:
+//
+// This code will compile just fine, but not do what you expect.
+// Because the JSON document doesn’t have an itemss field, the same document will be returned unmodified.
 
 val doubleQuantitiesTypo: Json => Json = // leaves the numbers unchanged
-  JsonPath.root.order.itemss.each.quantity.int.modify(_ * 2) // Note the "itemss" typo
+  JsonPath
+    .root
+    .order
+    .itemss
+    .each
+    .quantity
+    .int
+    .modify(_ * 2) // Note the "itemss" typo
 
-val modifiedJsonTypo = doubleQuantitiesTypo(json) tap println
+val modifiedJsonTypo =
+  doubleQuantitiesTypo(json)
